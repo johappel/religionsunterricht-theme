@@ -12,3 +12,4 @@ benötigte Plugins: FacetWP, Blocksy Companion,  Advanced Custom Fields
 - Updated: 2020-11-07 
 
 ### Screnshot
+![](screenshot.png)
