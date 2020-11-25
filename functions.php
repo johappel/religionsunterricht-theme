@@ -748,24 +748,17 @@ function blocksy_entry_excerpt($length = 40, $class = 'entry-excerpt', $post_id 
 
 	$has_native_excerpt = $post->post_excerpt;
 
-	$excerpt = null;
+	$excerpt = trim(get_metadata('post',$post->ID,'excerpt',true),$length);
 
-	if ($has_native_excerpt) {
+	if (! $excerpt && $has_native_excerpt) {
 		$excerpt = get_the_excerpt($post_id);
 	}
 
 	if (! $excerpt) {
 
-		if (empty(trim(get_the_excerpt($post->ID)))) {
-
-			$excerpt = blocksy_trim_excerpt(get_metadata('post',$post->ID,'excerpt',true),$length);
-
-		}else{
-			ob_start();
-    		blocksy_trim_excerpt(get_the_excerpt($post_id), $length);
-			$excerpt = trim(ob_get_clean());
-        }
-
+		ob_start();
+		blocksy_trim_excerpt(get_the_excerpt($post_id), $length);
+		$excerpt = trim(ob_get_clean());
 
 	}
 
